@@ -1,0 +1,17 @@
+.Admin_Container{
+    width: 100%;
+    border-top: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+}
+.Admin_form{
+    text-align: center;
+    margin: 1em;
+    max-width: 320px;
+}
+.Admin_form input[type=text]{
+    min-width: 320px;
+}
+.Admin_form textarea{
+    min-height: 100px;
+}

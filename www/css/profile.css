@@ -1,0 +1,147 @@
+:root{
+    --cwidth:100px;
+}
+.AvaFileBtn{
+    display: none;
+}
+.Avatar_Container{
+    /* background: radial-gradient(circle at 50% 33%, #ffffff1e 5%, #1c5a9900 45%); */
+    margin-bottom: 2em;
+    /* height: 220px; */
+}
+.info {
+    position: absolute;
+    top:  38%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    min-width: 150px;
+    max-width: 300px;
+    text-align: center;
+    padding: 30px 30px;
+    border: 1px solid;
+    border-radius: 2em;
+    border-color: rgba(84,108,96,1);
+    background: radial-gradient(circle at 50% 20%, rgba(46,57,77,0.7) 1%, rgba(60,80,89,0.8) 41%, rgba(27,107,67,0.8) 80%);
+    color: green;
+    text-shadow: 2px 2px #1C1515;
+}
+
+#infoError {
+    border-color: #a21616a0;
+    background: radial-gradient(circle at 50% -30%, rgba(46,57,77,1) 1%, rgba(80,89,60,0.9051995798319328) 10%, rgba(107,27,27,1) 80%);
+    color: red;
+}
+.User_PassForm input{
+    background: none;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: rgb(88, 197, 161);
+    background-color: #17292e5b;
+    text-shadow: none;
+}
+.password-control {
+	position: absolute;
+    cursor: pointer;
+	top: 12px;
+	right: 6px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(https://bamboleo.local/icon/view.svg) 0 0 no-repeat;
+}
+.password-control.view {
+	background: url(https://bamboleo.local/icon/no-view.svg) 0 0 no-repeat;
+}
+.Profile {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position:relative;
+    visibility: hidden;
+    margin: 5em auto;
+    padding-top:25px;
+    padding-bottom:25px;
+    width: 650px; 
+    color: rgb(88, 197, 161);
+    background: 
+    radial-gradient(ellipse at 0% 0%, #212529 42%, transparent),
+    radial-gradient(ellipse at 100% 100%, #387e759f , transparent);
+    box-shadow: 15px 15px 15px -10px rgba(29, 124, 57, 0.4); 
+    border-radius:1em;
+    /* filter: drop-shadow(0.1rem 0.1rem 0.12rem rgba(4, 236, 43, 0.288)); */
+}
+.ProfileRow{
+    margin-top: 1em;
+    display: flex;
+}
+.Profile_Avatar{
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1em;
+    filter: drop-shadow(0.1rem 0.1rem 0.2em rgb(50, 108, 207));
+    /* padding: 20px; */
+    max-width: 130px;
+    height: 130px;
+    transition: 1s;
+}
+.Profile_Avatar:hover {
+    filter: drop-shadow(0.1rem 0.3rem 0.3em rgb(24, 163, 93));
+    transition: 1s;
+    cursor: pointer;
+}
+.Profile_table{
+    position:relative; 
+    text-align:center; 
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+.Profile_Field{
+    min-height: 3em;
+    position: relative;
+    padding: 0.4em 0 0.4em;
+}
+.Profile_Field:before {
+    width: 10px;
+    left: -1px;
+}
+.Profile_Field:before,
+.Profile_Field:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 99%;
+    border-top: 1px solid grey;
+}
+.Field_Name {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    /* margin-left: 0.2em; */
+    font-size: 0.7em;
+    border-bottom: 1px solid grey;
+    padding: 0 4px 0 4px;
+}
+.Field_Name:before,
+.Field_Name:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 7px;
+    /* border-right: 1px solid grey; */
+    border-left: 1px solid grey;
+}
+.Field_Name:before {
+    left: 0;
+}
+.Field_Name:after {
+    right: 0;
+}
+.Field_Data {
+    color: rgb(84,108,96);
+    font-weight: bold;
+    filter: drop-shadow(0 0 0.1rem rgba(46,57,77,1));
+    text-shadow: 1px 1px 1px rgb(8, 245, 127);
+    vertical-align: sub;
+}

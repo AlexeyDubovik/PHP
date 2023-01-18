@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/page500.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Some problems with the site</h1>
+    <h2>Please look at the phases of the moon</h2>
+    <container></container>
+    <script src = "./lib/react/react.development.js"></script>
+    <script src = "./lib/react/react-dom.development.js"></script>
+    <script src = "./lib/react/babel.min.js"></script>
+    <script type = "text/babel">
+//------Initial-Data---------------------------------------------------------------------------------------  
+        //Стили
+        const styleSTR = 'display: inline-flex; margin:auto;';
+        const styleSTRimg = `width: 150px; height: 150px;`;
+        //Preload string HTML
+        const Preload = `<img style="${styleSTRimg}" src="./icon/pngegg.png" alt="">`;
+        //Проброс события для React елемента
+        const MyDispachEvent = (target, eventName, ReactCallBack) => {
+            let e = new Event(`${eventName}`);
+            target.dispatchEvent(e);
+            ReactCallBack(e);
+        };
+        //Запрос для Календаря луны
+        const CalendarMoonFetch = (date, size, scolor) => {
+                const URL = "https://www.icalendar37.net/lunar/api/";
+                return fetch(`${URL}?
+                    year=${date.getFullYear()}&
+                    month=${date.getMonth() + 1}&
+                    day=${date.getDate()}&
+                    shadeColor=${scolor}&
+                    size=${size}&
+                    texturize=true`)
+                .then(r=>r.json());
+            };
+        //3 запроса для Календря
+        const GetMoons = (date, size, scolor) => {
+            const minusDay = new Date(date.getTime() - ((24*60*60*1000)));
+            const plusDay  = new Date(date.getTime() + ((24*60*60*1000)));
+            return Promise.all([
+                CalendarMoonFetch(minusDay, (size - 50), scolor),
+                CalendarMoonFetch(date, size, scolor),
+                CalendarMoonFetch(plusDay, (size - 50), scolor)
+            ]);
+        };
+        //Данные луны в string HTML код
+        const MoonInject_STR = (m) => {
+            let day = m.receivedVariables.day; 
+            //console.log(m.phase[day].svg);
+            let weekN = m.phase[day].dayWeek; 
+            let date = new Date(`${m.receivedVariables.year}-${m.receivedVariables.month}-${m.receivedVariables.day}`)
+            return `<div class="moon">
+                        <div class="moon_date">${date.toLocaleDateString()}</div><br/>
+                        <div>${m.phase[day].svg.replaceAll('fill="#FFFF88"','fill="#b6dfe0ab"')}</div>
+                        <div class="moon_info">
+                            <div>${m.nameDay[weekN]}</div>
+                            <div>${m.phase[day].lighting.toFixed(2)}%</div>
+                            <div>${m.phase[day].phaseName}</div>
+                        </div>
+                    </div>`
+        }
+//------React-Conteiner-function----------------------------------------------------------------------------        
+        function Moon(props){
+            var h = "Hello";
+            var obj = {__html: `<b>${h}</b>`};
+            const [date, setDate] = React.useState(props.date ? new Date(props.date) : new Date());
+            const [txt, settxt] = React.useState(h);
+            const [divHtml, setDivHtml] = React.useState(obj);
+            //Испытание preload на h2 елементе
+            const h2Click = React.useCallback(() => {
+                setDivHtml( {__html: Preload} );
+                setTimeout(()=>{settxt(txt + "*")}, 5000);
+            });
+            //событие для кнопки "-"
+            const inc = () => {
+                let input = document.querySelector('input[type="date"]');
+                input.valueAsDate = new Date(input.valueAsDate.getTime() - ((24*60*60*1000)));
+                MyDispachEvent(input,"change", ChangeDate);
+            };
+            //событие для кнопки "+"
+            const dec = () => {
+                let input = document.querySelector('input[type="date"]');
+                input.valueAsDate = new Date(input.valueAsDate.getTime() + ((24*60*60*1000)));
+                MyDispachEvent(input,"change", ChangeDate);
+            };
+            //Событие для изменения [input type='date']
+            const ChangeDate = React.useCallback((e) => {
+                let dt = new Date(e.target.value);
+                setDate(dt);
+            });
+            //Запрос для календаря и иньктирование в div container
+            const Load = () => {
+                GetMoons(date, 150, "black")
+                .then(([m, m1, m2])=> {
+                    //console.log(m1);
+                    setDivHtml({
+                        __html: `
+                            <div style="${styleSTR}">
+                                ${MoonInject_STR(m)}
+                                ${MoonInject_STR(m1)}
+                                ${MoonInject_STR(m2)}
+                            </div>`
+                    })
+                })
+            }
+            //Подписки
+            React.useEffect(()=>{ 
+                //Fetch(); 
+            }, []);
+            React.useEffect(()=>{
+                setDivHtml( {__html: Preload} );
+                Load();
+            }, [date]);
+            React.useEffect(()=>{
+                obj = {__html:  `<b>${txt}</b>`};
+                setDivHtml(obj);
+            },[txt]);
+            return <>
+                <h2 onClick={h2Click}>Moon Widget</h2>
+                <div>
+                    <button class="ControlPannel" onClick={inc}>-</button>
+                    <input  class="ControlPannel" onChange={ChangeDate} type="date" 
+                        defaultValue={date.toISOString().slice(0,10)}/>
+                    <button class="ControlPannel" onClick={dec}>+</button>
+                </div>
+                <div dangerouslySetInnerHTML={divHtml}></div>
+            </>
+        }
+//------React-Render-DOM----------------------------------------------------------------------------------   
+        ReactDOM.render( 
+            <Moon date="2022-09-26"/>, 
+            document.querySelector("container")
+        );
+    </script>
+</body>
+</html>

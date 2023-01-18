@@ -1,0 +1,30 @@
+@media (max-width: 768px){
+    .reg-form{
+        width: 80%;
+        max-width: 300px;
+    }
+    .form-group .row{
+        height: auto;
+    }
+    .row{
+        flex-direction: column;
+    }
+    .form-group .row .col-auto{
+        width: 100%;
+    }
+}
+@media (min-width: 768px){
+    .reg-form{
+        width: 80%;
+        max-width: 700px;
+    }
+    .form-group .row{
+        height: 2.5em;
+    }
+    .form-control{
+        height: 2.5em;
+    }
+    .form-group .row .col-auto{
+        width: 25%;
+    }
+}

@@ -1,0 +1,20 @@
+
+    CREATE TABLE user_roles (  
+    id VARCHAR(16) PRIMARY KEY,
+    descr TINYTEXT NOT NULL
+) ENGINE = InnoDB, DEFAULT CHARSET = UTF8 ;
+    INSERT INTO user_roles VALUES( 'admin', 'Системный администратор - доступ к DDL' )
+INSERT INTO user_roles VALUES( 'moderator', 'Контент-модератор - доступ к DML' )
+    INSERT INTO user_roles VALUES( 'guest', 'Гость - минимальные права на просмотр открытого контента' )
+    ALTER TABLE users ADD COLUMN role_id VARCHAR(16) NOT NULL DEFAULT 'guest'
+ALTER TABLE users ADD FOREIGN KEY (role_id) REFERENCES user_roles(id)
+
+CREATE TABLE product_category 
+(
+    id           CHAR(36) NOT NULL,
+  	product_id   CHAR(36) NOT NULL,
+  	category_id  CHAR(36) NOT NULL,
+  	primary key (id),
+    FOREIGN KEY (product_id)  REFERENCES products(product_id),
+  	FOREIGN KEY (category_id) REFERENCES product_categories(category_id)
+) ENGINE=InnoDB, DEFAULT CHARSET = UTF8 ;

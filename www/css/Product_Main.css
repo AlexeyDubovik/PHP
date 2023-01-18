@@ -1,0 +1,132 @@
+.color_1 { 
+    stop-color: rgb(251, 255, 0); 
+}
+.color_2 { 
+    stop-color: rgb(97, 95, 95); stop-opacity: 1; 
+}
+.container_prod_name{
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container_prod_descr{
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.filter_field{
+    border-right: 1px solid gray;
+}
+.filter_form{
+    min-width: 200px;
+    border-bottom: 1px solid gray;
+}
+.form-select{
+    padding-right: 1em;
+}
+.Group_container{
+    display: flex;
+    flex-direction: column;
+    margin: 1.5em;
+    color:aquamarine;
+    font-size: 0.9em;
+}
+.Group_container i{
+    color: rgb(163, 163, 163);
+}
+.Group_container input[type=checkbox]{
+    background: #345858;
+    cursor: pointer;
+}
+.Group_container label{
+    cursor: pointer;
+}
+.Products-Shop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1em;
+    margin-top: 1em;
+    width: 100%;
+}
+.img-container{
+    margin-bottom: 1em;
+    width: 100%;
+}
+.Products_Empty{
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 150px;
+}
+.product{
+    display: flex;
+    flex-direction: column;
+    /* max-width: 350px;
+    height: 400px; */
+    padding: 1em;
+    margin: 10px;
+    border-radius: 15px;
+}
+.product a{
+    text-decoration: none;
+}
+.product h4{
+    color: rgb(92, 179, 150);
+    margin-top: 0.4em;
+    font-size: 2em;
+}
+.product h5{
+    font-size: 0.8em;
+}
+.product_head_2{
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+}
+.product .price{
+    color:rgb(184, 0, 0);
+    font-weight: 500;
+    font-size: 1.2em;
+    cursor:text;
+}
+.price_area{
+    display: flex;
+    align-items: center;
+}
+.product_image{
+    width: 100%;
+    /* min-height: 150px;
+    max-height: 150px; */
+}
+.product_info{
+    display: flex;
+}
+.product_info div {
+    flex: 1 1 50%;
+}
+.rating-area{
+    display: flex;
+}
+.rate{
+    width: 20px;
+    padding: 0;
+    cursor: pointer;
+}
+.Star_Path{
+    stroke: "#f00";
+    stroke-width: 1; 
+}
+.tab-area{
+    margin: 1em 0 1em;
+}
+.trade{
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 10px;
+    /* background: orange; */
+}
+
+

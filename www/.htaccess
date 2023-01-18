@@ -1,0 +1,4 @@
+# включаем модуль обработки запросов
+RewriteEngine On
+# перенаправляем запросы на файл access_manager.php
+RewriteRule .* access_manager.php [QSA]
