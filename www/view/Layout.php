@@ -41,7 +41,7 @@
                 </li>
                 <?php if (isset($_CONTEXT['auth_user']['rights']) && $_CONTEXT['auth_user']['rights'] === "admin" ){ ?>      
                     <li class="nav-item">
-                        <a class="nav-link" href="/phpmyadmin">myAdmin</a>
+                        <a class="nav-link" href="/phpmyadmin">phpMyAdmin</a>
                     </li>
                 <?php } ?>
                 <li class="nav-item">
@@ -67,11 +67,20 @@
                 </li>
                 <li class="nav-item">
                     <div class="nav-link" >
-                        <div class="basket">
-                            <div style="width:30px">
-                                <?= file_get_contents("icon/basket.svg"); ?>
+                        <a class="cart" href="/cart">
+                            <?php $count = 0;
+                                if (isset($_SESSION["curt"])) {
+                                    foreach($_SESSION["curt"] as $id => $value){
+                                        $count += $value;
+                                    }
+                                } ?>
+                                <div class="prod_count" <?php if ($count < 1) { echo "style='display:none;'";}?>>
+                                    <?= $count ?>
+                                </div>
+                            <div style="width:30px;">
+                                <?= file_get_contents("icon/cart.svg"); ?>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </li>
               </ul>

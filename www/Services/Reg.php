@@ -62,7 +62,7 @@ else {
         $body = include "Template/Mail_Code.php";
         //отправить код 
         $res = send_email("bamboleo confirm", $_POST['user_Email_Reg'], $body);
-        $sql = "INSERT INTO Users(`id`,`login`,`name`,`salt`,`pass`,`email`,`confirm`,`avatar`,`email_sent`) 
+        $sql = "INSERT INTO Users(`user_id`,`login`,`name`,`salt`,`pass`,`email`,`confirm`,`avatar`,`email_sent`) 
         VALUES(UUID(),?,?,'$salt','$pass',?,'$confirm_code',?,?)";
         $res = SQL_Request($sql, [ $login, $name, $email, $avatar, $res]);
         if(is_string($res)){

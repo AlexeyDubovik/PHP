@@ -2,7 +2,6 @@
 $_CONTEXT['pass_form'] = false;
 if(empty($_CONTEXT['path_parts'][2])){
     echo "Profile undefined";
-    //echo "<script> setTimeout(()=>{window.location='/'}, 2000) </script>";
     exit;
 }
 if(is_array($_CONTEXT['auth_user']) && $_CONTEXT['auth_user']['login'] == $_CONTEXT['path_parts'][2]){
@@ -58,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(file_exists('avatars/' . $_CONTEXT['auth_user']['avatar']) && $_CONTEXT['auth_user']['avatar'] !== "default.png"){
                 unlink('avatars/' . $_CONTEXT['auth_user']['avatar']);
             }
-            $sql = "UPDATE Users u SET u.`avatar` = ? WHERE u.id = ?";
+            $sql = "UPDATE Users u SET u.`avatar` = ? WHERE u.`user_id` = ?";
             $res = SQL_Request($sql, [ $avatar, $_CONTEXT['auth_user']['id']]);
             if(is_string($res)){
                 http_response_code(500);
@@ -93,13 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else if ($_POST["NewPass"] !== $_POST["ConfPass"]) {
                 $_CONTEXT['pass_form'][2] = "Passwords don't  match";
             } else {
-                $sql = "SELECT * FROM Users u WHERE u.`id` = ?";
+                $sql = "SELECT * FROM Users u WHERE u.`user_id` = ?";
                 $res = SQL_Request($sql, [$_CONTEXT['auth_user']['id']]);
                 if ($res) {
                     $salt = $res['salt'];
                     $hash = md5($_POST['OldPass'] . $salt);
                     if ($hash == $res['pass']) {
-                        $sql = "UPDATE Users u SET u.`pass` = ? WHERE u.id = ?";
+                        $sql = "UPDATE Users u SET u.`pass` = ? WHERE u.`user_id` = ?";
                         $hash = md5($_POST['ConfPass'] . $salt);
                         $res = SQL_Request($sql, [$hash, $_CONTEXT['auth_user']['id']]);
                         if (is_string($res)) {
@@ -150,11 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
                         echo "This email is already in use";
                         exit;
                     }
-                    $Tsql[] = "UPDATE Users u SET u.`email` = ? WHERE u.id = ?";
+                    $Tsql[] = "UPDATE Users u SET u.`email` = ? WHERE u.`user_id` = ?";
                     $param[] = [$value, $_CONTEXT['auth_user']['id']];
                     break;
                 case 'Name':
-                    $Tsql[] = "UPDATE Users u SET u.`name` = ? WHERE u.id = ?";
+                    $Tsql[] = "UPDATE Users u SET u.`name` = ? WHERE u.`user_id` = ?";
                     $param[] = [$value, $_CONTEXT['auth_user']['id']];
                     break;
                 case 'Login':
@@ -165,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
                         echo "This login is already in use";
                         exit;
                     }
-                    $Tsql[] = "UPDATE Users u SET u.`login` = ? WHERE u.id = ?";
+                    $Tsql[] = "UPDATE Users u SET u.`login` = ? WHERE u.`user_id` = ?";
                     $param[] = [$value, $_CONTEXT['auth_user']['id']];
                     break;
                 default:
@@ -188,4 +187,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 }
 include 'view/Layout.php';
-//include "view/Components/{$_CONTEXT['path_parts'][1]}.php";

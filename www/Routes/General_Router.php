@@ -13,7 +13,11 @@ switch ($_CONTEXT['path_parts'][1]) {
     case 'profile':
     case 'shop':
     case 'confirm':
+    case 'cart':
         include "view/{$_CONTEXT['path_parts'][1]}.php";
+        break;
+    case 'test':
+        include "view/unit.html";
         break;
     default:
         include 'view/404.php';

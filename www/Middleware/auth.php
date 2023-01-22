@@ -16,7 +16,7 @@ else if(isset($_POST['userlogin']) && isset($_POST['userpassw'])) {
         $hash = md5($_POST['userpassw'] . $salt);
         //сравниваем с сохраненным хешем
         if($hash == $res['pass']){ //авторизация успешна
-            $_SESSION['auth_id'] = $res['id'];
+            $_SESSION['auth_id'] = $res['user_id'];
             $_CONTEXT['auth_info'] = true;
             Redirect('/', false);
         }
@@ -29,13 +29,13 @@ else if(isset($_POST['userlogin']) && isset($_POST['userpassw'])) {
     }
 }
 else if(isset($_SESSION['auth_id'])){
-    $sql = "SELECT * FROM Users u WHERE u.`id` = ?";
+    $sql = "SELECT * FROM Users u WHERE u.`user_id` = ?";
     $error = "";
     $res = SQL_Request($sql, [$_SESSION['auth_id']]);
     if(is_array($res)){
         $res['avatar'] = $res['avatar'] === null ? "default.png" : $res['avatar'];
         $_CONTEXT['auth_user'] = [
-            'id'      => $res['id'], 
+            'id'      => $res['user_id'], 
             'login'   => $res['login'], 
             'name'    => $res['name'], 
             'email'   => $res['email'], 

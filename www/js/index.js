@@ -1,6 +1,9 @@
+const toggle = document.querySelector(".navbar-toggler");
+const menu   = document.querySelector(".navbar-collapse");
+const modal = document.querySelector('#exampleModal');
+
 document.addEventListener("DOMContentLoaded", ()=>{
-    const toggle = document.querySelector(".navbar-toggler");
-    const menu   = document.querySelector(".navbar-collapse");
+    
     toggle.style.boxShadow = "none";
     toggle.style.transition = ("0.5s");
     toggle.onmouseover = () =>{
@@ -20,7 +23,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
             menu.style.display = "flex";
         else menu.style.display = "none";
     }
-    const modal = document.querySelector('#exampleModal');
     if(modal !== null){
         var modal_childs = modal.querySelectorAll('button');
         modal_childs.forEach(element => {

@@ -1,5 +1,5 @@
 <div class="product" data-id="<?=$product['product_id']?>" >
-    <a href="/shop/?p=<?=$product['product_id']?>">
+    <a href="/shop/p<?=$product['product_id']?>">
         <div class="img-container" >
             <img class="product_image" src="/images/<?= $product['image'] ?>" />
         </div>
@@ -16,8 +16,6 @@
     <?php endif ?>
     <div class="rating-area">
         <div class="rating" data-rateValue="<?= $product['rating'] ?>">
-            <input class="rate_input_id" type="text"   name="product_id" value="<?= $product['product_id'] ?>">
-            <input class="rate_input" type="number" name="rating" >
             <?php for ($i = 1; $i <= 5; $i++) { ?>
                 <label class="rate" data-rateNumber="<?=$i?>">
                     <?php include "icon/Star.svg";?>

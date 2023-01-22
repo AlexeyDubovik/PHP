@@ -2,6 +2,10 @@
 //session_name("session_without_cookie");
 session_start();
 $session_life_time = 1440;
+if(isset($_SESSION['Form_Errors'])){
+    $_CONTEXT['Errors'] = $_SESSION['Form_Errors'];
+    unset($_SESSION['Form_Errors']);
+}
 if(isset($_GET['logout'])) {
     unset($_SESSION['auth_access']);
     unset($_SESSION['auth_id']);
