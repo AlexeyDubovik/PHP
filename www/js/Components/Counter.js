@@ -79,5 +79,5 @@ function change_color(number, btn){
         svg.style.fill = "aquamarine";
     }
 }
-export {counter_handler}
+export {counter_handler, minus, plus, change_color}
 

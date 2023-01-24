@@ -70,11 +70,47 @@
 }
 .logout:hover{
     filter: drop-shadow(0.1rem 0.1rem 0.1rem #3332318c);
-    stroke:#e00707b4;
+    width: 20px;
+    /* transition: 1s; */
 }
-.modal{
-    display: block;
+.logout:hover line:nth-child(n+5){
+    stroke:#2d34428c;
 }
+.logout:hover line:nth-child(-n+4){
+    stroke:#ff0101;
+    stroke-width: 2px;
+    transform: scaleX(1.1);
+}
+.logout:hover path{
+    stroke:#2d34428c;
+}
+.modal {
+    display: none;
+    padding-right: 17px;
+    text-align: center;
+    background: #000000c2;;
+}
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+.modal-dialog {
+    width: 80%;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    top:-10px;
+}
+.modal-message{
+    color: aquamarine;
+    border: 1px solid rgb(67, 143, 118);
+    background: #212529;
+}
+
 .nav-item .nav-link{
     font-weight: 500;
     color: rgb(157, 224, 215);

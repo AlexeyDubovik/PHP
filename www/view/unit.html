@@ -11,20 +11,45 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="https://code.jquery.com/qunit/qunit-2.19.3.js"></script>
-    <script type="module" src="../js/Shop_Main.js"></script>
-    <script type="module" src="../js/Registration.js"></script>
-    <script type="module" src="../js/Profile.js"></script>
-    <script type="module" src="../js/Product_Main.js"></script>
-    <script type="module" src="../js/index.js"></script>
-    <script type="module" src="../js/confirm.js"></script>
-    <script type="module" src="../js/Cart.js"></script>
-    <script type="module" src="../js/Auth_Profile.js"></script>
-    <script>
-        const utils = new Utils();
-        // QUnit.module('Utils', function() {
-        //   QUnit.test('Path Combine', function(assert) {
-        //     assert.equal(utils.pathCombine('/p1', '/p2'), '/p1/p2');});
-        // });
+    <!-- <script src="js/Components/Counter.js"></script> -->
+    <script type="module">
+        import {counter_handler, minus, plus, change_color} from "../js/Components/Counter.js";
+        QUnit.module('Counter', function() {
+            QUnit.test('minus', function(assert) {
+                const event = new InputEvent('click');
+                var input = document.createElement("INPUT");
+                var button = document.createElement("button");
+                input.setAttribute("type", "number");
+                var span  = document.createElement('span');
+                input.value = 2;
+                span.innerText = 1;
+                button.onclick = minus(input, span);
+                button.dispatchEvent(event);
+                assert.equal(input.value, 1);
+            });
+            QUnit.test('plus', function(assert) {
+                const event = new InputEvent('click');
+                var input = document.createElement("INPUT");
+                var button = document.createElement("button");
+                input.setAttribute("type", "number");
+                var span  = document.createElement('span');
+                input.value = 1;
+                span.innerText = 1;
+                button.onclick = plus(input, span);
+                button.dispatchEvent(event);
+                assert.equal(input.value, 2);
+            });
+            QUnit.test('change_Button_color', function(assert) {
+                var div = document.createElement('div');
+                var svg = document.createElement('svg')
+                //svg.style.fill = "aquamarine";
+                div.append(svg);
+                change_color(1, div);
+                assert.equal(svg.style.fill, 'grey');
+                change_color(10, div);
+                assert.equal(svg.style.fill, 'aquamarine');
+            });
+        });
     </script>
 </body>
 </html>

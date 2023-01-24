@@ -10,8 +10,6 @@ const productEl    = document.querySelector(".product");
 const Product_id   = productEl === null ? null : productEl.dataset.id;
 const ProductCount = document.querySelector(".prod_count");
 const Liking       = document.querySelectorAll(".estimate");
-const Review       = document.querySelector(".review");
-
 
 //
 //functions
@@ -65,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let Rate of Rating) fillRating(Rate);
     if(Liking != null){
         Liking.forEach(item =>{
-             LikingHandler(item, Review.id);
+            let id = item.closest(".review").id;
+            LikingHandler(item, id);
         })  
     }
     if(Form_Rating != null){

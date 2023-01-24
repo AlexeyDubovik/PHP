@@ -59,7 +59,7 @@ else {
         $salt = md5(random_bytes(16));
         $pass = md5($_POST['user_pass_Conf'] . $salt);
         $confirm_code = bin2hex(random_bytes(3));
-        $body = include "Template/Mail_Code.php";
+        $body = "<b>Hello  {$_POST['user_name_Reg']}</b><br>Type code <strong>{$confirm_code} </strong>";
         //отправить код 
         $res = send_email("bamboleo confirm", $_POST['user_Email_Reg'], $body);
         $sql = "INSERT INTO Users(`user_id`,`login`,`name`,`salt`,`pass`,`email`,`confirm`,`avatar`,`email_sent`) 
@@ -73,6 +73,7 @@ else {
                 move_uploaded_file($_FILES['avatar']['tmp_name'], './avatars/' . $avatar);
             }
             $_SESSION[ 'reg_ok' ] = "New user created successfully";
+            Redirect('/registration');
         }
     } 
 }

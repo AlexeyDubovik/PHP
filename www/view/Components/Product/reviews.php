@@ -14,12 +14,16 @@
         </div>
         <div class="pr_body">
         <?php if (isset($review_error)) {
-                echo $review_error;
-            } else if (isset($_CONTEXT['reviews'])) { 
+            echo "<div class='text-danger'>" . $review_error . "</div>;";
+            } else if (isset($_CONTEXT['reviews'])) {
                 foreach($_CONTEXT['reviews'] as $review){
                     include "view/Components/Product/review_post.php";
                 } 
-            } 
+            } else {
+                echo "<div class='text-center text-info'> 
+                    <div class='h1 m-5'>Empty Field</div>
+                </div>";
+            }
         ?>
         </div>
     </div>     

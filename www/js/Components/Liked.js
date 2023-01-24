@@ -6,9 +6,10 @@ function LikingHandler(Liking, id){
 }
 function sendToServer(reaction, id){
     return (e) => {
+        //console.log(id);
         let span = e.target.parentNode.querySelector('span');
         let formData = new FormData();
-        formData.append('like', reaction);
+        formData.append('reaction', reaction);
         formData.append('review_id', id);
         fetch( window.location.href, {
             method:"POST",
@@ -16,7 +17,7 @@ function sendToServer(reaction, id){
         })
         .then(r => r.json())
         .then(j =>{
-            console.log(j);
+            console.log(j.status);
             if(j.status === "success"){
                 let num = Number(span.innerText);
                 span.innerText = num + 1;

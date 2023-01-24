@@ -17,7 +17,10 @@ switch ($_CONTEXT['path_parts'][1]) {
         include "view/{$_CONTEXT['path_parts'][1]}.php";
         break;
     case 'test':
-        include "view/unit.html";
+        if(isset($_CONTEXT['auth_user']['rights']) && $_CONTEXT['auth_user']['rights'] == 'admin')
+            include "view/unit.html";
+        else
+            include 'view/404.php';     
         break;
     default:
         include 'view/404.php';

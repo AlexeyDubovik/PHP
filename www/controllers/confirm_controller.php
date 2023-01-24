@@ -33,7 +33,7 @@ else if(isset($_GET['email'])){
     }
 }
 else if(strlen($_GET['code']) > 0 && !empty( $_CONTEXT['auth_user'])){
-    $sql = "SELECT u.confirm FROM Users u WHERE u.id = '{$_CONTEXT['auth_user']['id']}'";  
+    $sql = "SELECT u.confirm FROM Users u WHERE u.`user_id` = '{$_CONTEXT['auth_user']['id']}'";  
     $res = SQL_Request($sql, [], PDO::FETCH_NUM);
     print_error($res);
     $db_code = $res[0];
@@ -41,7 +41,7 @@ else if(strlen($_GET['code']) > 0 && !empty( $_CONTEXT['auth_user'])){
         $_CONFIRM_INFO = 'Mail confirmed, no action required';
     }
     else if($db_code === $_GET['code']){
-        $sql = "UPDATE Users u SET u.confirm = NULL WHERE u.id = '{$_CONTEXT['auth_user']['id']}'";
+        $sql = "UPDATE Users u SET u.confirm = NULL WHERE u.`user_id` = '{$_CONTEXT['auth_user']['id']}'";
         $res = SQL_Request($sql, []);
         print_error($res);
         //$_CONFIRM_INFO = 'Mail confirmed';

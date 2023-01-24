@@ -168,27 +168,6 @@ input:-webkit-autofill,
 .pr_body{
     margin-top: 2em;
 }
-.modal {
-    display: none;
-    padding-right: 17px;
-    text-align: center;
-    background: #000000c2;;
-}
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
-}
-.modal-dialog {
-    width: 80%;
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-    top:-10px;
-}
 .pr_header{
     padding-left: 1em;
     /* border: 1px solid grey;
@@ -295,7 +274,7 @@ input:-webkit-autofill,
     fill: aquamarine;
 }
 .reply{
-    /* margin-top: 2em; */
+    margin-top: 1em;
     margin-left: 1em;
     padding: 0.5em 0;
     border-left: 1px solid rgb(2, 99, 2);

@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             element.oninput = (e) => {
                 span_init(element);
+                //console.log(length);
                 if(element.value.length > 0){
                     if(element.id === "reg_email" && validateEmail(element.value)){
                         span.innerText = "";
@@ -70,23 +71,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         span.innerText = "";
                         symbols_confirmed = true;
                     }
-                    // console.log(text_inputs_filled_count);
-                    // console.log(symbols_confirmed);
-                    // console.log(pass_confirmed);
-                    // console.log(email_confirmed);
-                    if((element.value.length === 1 &&
-                        e.inputType !== "deleteContentForward" && 
-                        e.inputType !== "deleteContentBackward" && ( 
-                        e.inputType === 'insertText' && length === 0)) ||
-                        e.inputType === "insertFromPaste" || (
-                        e.inputType === undefined && length === 0)){
+                    if((element.value.length > 0 ||
+                        e.inputType === "insertFromPaste") 
+                        && e.inputType !== "deleteContentForward" 
+                        && length === 0
+                        // && e.inputType !== "deleteContentBackward" 
+                        // && (e.inputType === 'insertText' && length === 0) 
+                        ){
                         text_inputs_filled_count--;
                     }
                 }
-                else{
+                else if(element.value.length === 0) {
                     span.innerText = "*";
                     text_inputs_filled_count++;
                 }
+                console.log(text_inputs_filled_count);
+                // console.log(symbols_confirmed);
+                // console.log(pass_confirmed);
+                // console.log(email_confirmed);
+                // console.log(element.value.length);
                 length = element.value.length;
                 button_solver();
             };

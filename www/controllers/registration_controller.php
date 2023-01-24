@@ -10,7 +10,7 @@ switch (strtoupper($_SERVER['REQUEST_METHOD'])){
             $view_data = $_SESSION['data_form'];
             unset( $_SESSION[ 'reg_error' ]);
         }
-        if( isset( $_SESSION[ 'reg_ok' ] ) ) {
+        else if(isset( $_SESSION[ 'reg_ok' ])) {
             $_DIALOG_INFO = $_SESSION[ 'reg_ok' ];
             unset( $_SESSION[ 'reg_ok' ] ) ;
         }
